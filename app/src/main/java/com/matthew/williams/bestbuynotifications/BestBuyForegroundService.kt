@@ -66,15 +66,14 @@ class BestBuyForegroundService : Service() {
     }
 
     private fun showNotification() {
-        val notificationIntent = Intent(Intent.ACTION_VIEW).apply {
-            data =
-                Uri.parse("https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442")
-        }
+        val notificationIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 1, notificationIntent, 0)
 
         val notification: Notification =
             Notification.Builder(this, BestBuyNotifications.GENERAL_NOTIFICATION_CHANNEL)
                 .setContentTitle(getText(R.string.notification_title))
+                .setContentText("Checking every 10 seconds...")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)
                 .build()
 
